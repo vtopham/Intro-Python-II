@@ -5,3 +5,8 @@ class Room:
     def __init__(self, name, description):
         self.name = name
         self.description = description
+        self.n_to = "invalid"
+        self.s_to = "invalid"
+        self.e_to = "invalid"
+        self.w_to = "invalid"
+        self.x_to = "invalid"

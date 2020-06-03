@@ -51,10 +51,40 @@ victoria = Player("victoria", room['outside'])
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
-
+def out_of_bounds():
+    print("=======That area is out of bounds=======")
+    game_loop()
+    
 def move_player(user_input):
-    print("We'll move you in a sec!")
-    print(room[victoria.current_room.name].n_to)
+    if user_input == "n":
+        if victoria.current_room.n_to == "invalid":
+            out_of_bounds()
+        else:
+            victoria.current_room = victoria.current_room.n_to
+            game_loop()
+
+    elif user_input == "e":
+        if victoria.current_room.e_to == "invalid":
+            out_of_bounds()
+        else:
+            victoria.current_room = victoria.current_room.e_to
+            game_loop()
+    elif user_input == "s":
+        if victoria.current_room.s_to == "invalid":
+            out_of_bounds()
+        else:
+            victoria.current_room = victoria.current_room.s_to
+            game_loop()
+    elif user_input == "w":
+        if victoria.current_room.w_to == "invalid":
+            out_of_bounds()
+        else:
+            victoria.current_room = victoria.current_room.w_to
+            game_loop()
+    else:
+        print("You called this function wrong, buddy")
+    
+    
 
 def game_loop():
     print(f"Location: {victoria.current_room.name}\n{victoria.current_room.description}\n\nWhere do you go next? [n] [e] [s] [w] [q for quit]")
