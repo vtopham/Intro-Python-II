@@ -53,7 +53,7 @@ victoria = Player("victoria", room['outside'])
 # If the user enters "q", quit the game.
 
     
-
+#Takes validated input and moves the player, if possible
 def move_player(user_input):
     next_room = getattr(victoria.current_room, f"{user_input}_to")
     if next_room == "invalid":
@@ -63,7 +63,7 @@ def move_player(user_input):
     game_loop()
 
     
-
+#core loop of the game
 def game_loop():
     print(f"Location: {victoria.current_room.name}\n{victoria.current_room.description}\n\nWhere do you go next? [n] [e] [s] [w] [q for quit]")
     user_input = input()
