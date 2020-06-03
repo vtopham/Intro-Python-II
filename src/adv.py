@@ -40,7 +40,7 @@ room['treasure'].s_to = room['narrow']
 # Make a new player object that is currently in the 'outside' room.
 
 victoria = Player("victoria", room['outside']) 
-print(victoria.room_loop())
+
 # Write a loop that:
 #
 # * Prints the current room name
@@ -51,3 +51,24 @@ print(victoria.room_loop())
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+
+def move_player(user_input):
+    print("We'll move you in a sec!")
+    print(room[victoria.current_room.name].n_to)
+
+def game_loop():
+    print(f"Location: {victoria.current_room.name}\n{victoria.current_room.description}\n\nWhere do you go next? [n] [e] [s] [w] [q for quit]")
+    user_input = input()
+    if user_input == "q":
+        print("Thanks for playing and have a nice day!")
+    elif user_input == "n" or user_input == "e" or user_input == "s" or user_input == "w":
+        move_player(user_input)
+    else:
+        print("Please enter a valid direction, or q to quit the game!")
+
+
+
+
+
+
+game_loop()

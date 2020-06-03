@@ -6,10 +6,13 @@ class Player:
         self.name = name
         self.current_room = current_room
     
-    def room_loop(self):
-        print(f"Location: {self.current_room.name}")
-        print(f"Location: {self.current_room.description}")
-        print(f"Location: {self.current_room.description}")
+    # def room_loop(self):
+    #     print(f"Location: {self.current_room.name}\n{self.current_room.description}\n\nWhere do you go next? [n] [e] [s] [w] [q for quit]")
+    #     user_input = input()
+
+        
+
+        
         
     # def move(direction):
     #     if direction == "n":
