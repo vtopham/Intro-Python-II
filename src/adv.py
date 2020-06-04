@@ -108,8 +108,9 @@ def take_item(item):
 def drop_item(item):
     is_in_inventory = 0
     #is the item in the room?
+    is_in_inventory = 0
     for x in range(len(victoria.inventory)):
-        is_in_inventory = 0
+        
         if victoria.inventory[x].name.lower() == item:
             
             victoria.current_room.items_list[victoria.inventory[x].name] = victoria.inventory[x]
@@ -117,8 +118,8 @@ def drop_item(item):
             victoria.inventory[x].on_drop()
             victoria.inventory.pop(x)
             is_in_inventory = 1
-        if is_in_inventory == 0:
-            print(f"You never had {item} to begin with!")
+    if is_in_inventory == 0:
+        print(f"You never had {item} to begin with!")
     game_loop()
 
         
