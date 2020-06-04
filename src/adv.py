@@ -96,7 +96,6 @@ def take_item(item):
         if v.name.lower() == item:
             victoria.inventory.append(v)
             v.on_take()
-            # print(f"You have picked up the {v.name}")
             is_in_room = 1
             key = k
     if is_in_room == 1:
@@ -125,7 +124,7 @@ def game_loop():
     print("\n")
 
     #print player instructions
-    print("Movement: [n] [e] [s] [w] [q for quit]\nPick up item: [take [item]]")
+    print("Movement: [n] [e] [s] [w] [q for quit]\nPick up item: [take [item]]\nInventory: [i]")
     
     #get input and act
     user_input = input().lower().split(" ")
@@ -135,6 +134,14 @@ def game_loop():
         user_input = user_input[0]
         if user_input == "q":
             print("Thanks for playing and have a nice day!")
+        elif user_input == "i":
+            if len(victoria.inventory) > 0:
+                print("==Inventory==")
+                for x in victoria.inventory:
+                    print(x.name)
+            else:
+                print("Your pockets are empty")
+            game_loop()
         elif user_input == "n" or user_input == "e" or user_input == "s" or user_input == "w":
             move_player(user_input)
         else: 
