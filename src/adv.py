@@ -88,30 +88,53 @@ def move_player(user_input):
         victoria.current_room = next_room
     game_loop()
 
+#Lets a user attempt to pick up an item
+def take_item(item):
+    is_in_room = 0
+    #is the item in the room?
+    for k, v in victoria.current_room.items_list.items():
+        if v.name.lower() == item:
+            victoria.inventory.append(v)
+            
+            print(f"You have picked up the {v.name}")
+            is_in_room = 1
+    if is_in_room == 1:
+        victoria.current_room.items_list.pop(k)
+    else:
+        print("That item isn't in this room!")
+    game_loop()      
+        
+            
     
 #core loop of the game
 def game_loop():
     
     #print location information
-    print(f"==Location: {victoria.current_room.name}==\n{victoria.current_room.description}\n")
+    print(f"\n==Location==\n{victoria.current_room.name}\n{victoria.current_room.description}\n")
     
     #print items information
     print("==Items==")
-    for k, v in victoria.current_room.items_list.items():
-        print(f"{v.name}: {v.description}")
+    if len(victoria.current_room.items_list) == 0:
+        print("There are no items in this room!")
+    else:
+        for k, v in victoria.current_room.items_list.items():
+            print(f"{v.name}: {v.description}")
     print("\n")
 
     #print player instructions
-    print("Movement: [n] [e] [s] [w] [q for quit]\nPick up item: [grab [item]]")
+    print("Movement: [n] [e] [s] [w] [q for quit]\nPick up item: [take [item]]")
     
     #get input and act
-    user_input = input()
+    user_input = input().lower()
+    
     if user_input == "q":
         print("Thanks for playing and have a nice day!")
     elif user_input == "n" or user_input == "e" or user_input == "s" or user_input == "w":
         move_player(user_input)
+    elif user_input[0:5] == "take ":
+        take_item(user_input[5:])
     else:
-        print("Please enter a valid direction, or q to quit the game!")
+        print("Please enter a valid command, or q to quit the game!")
 
 
 

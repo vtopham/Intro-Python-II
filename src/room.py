@@ -9,4 +9,3 @@ class Room:
         self.s_to = "invalid"
         self.e_to = "invalid"
         self.w_to = "invalid"
-        self.items_list = []

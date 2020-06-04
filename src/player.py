@@ -5,6 +5,7 @@ class Player:
     def __init__(self, name, current_room):
         self.name = name
         self.current_room = current_room
+        self.inventory = []
     
     # def room_loop(self):
     #     print(f"Location: {self.current_room.name}\n{self.current_room.description}\n\nWhere do you go next? [n] [e] [s] [w] [q for quit]")
