@@ -78,50 +78,6 @@ victoria = Player("victoria", room['outside'])
 #
 # If the user enters "q", quit the game.
 
-    
-#Takes validated input and moves the player, if possible
-def move_player(user_input):
-    next_room = getattr(victoria.current_room, f"{user_input}_to")
-    if next_room == "invalid":
-        print("=======That area is out of bounds=======")
-    else: 
-        victoria.current_room = next_room
-    game_loop()
-
-#Lets a user attempt to pick up an item
-def take_item(item):
-    is_in_room = 0
-    #is the item in the room?
-    for k, v in victoria.current_room.items_list.items():
-        if v.name.lower() == item:
-            victoria.inventory.append(v)
-            v.on_take()
-            is_in_room = 1
-            key = k
-    if is_in_room == 1:
-        victoria.current_room.items_list.pop(key)
-    else:
-        print("That item isn't in this room!")
-    game_loop()      
-
-#Lets a user drop an item
-def drop_item(item):
-    is_in_inventory = 0
-    #is the item in the room?
-    is_in_inventory = 0
-    for x in range(len(victoria.inventory)):
-        
-        if victoria.inventory[x].name.lower() == item:
-            
-            victoria.current_room.items_list[victoria.inventory[x].name] = victoria.inventory[x]
-            
-            victoria.inventory[x].on_drop()
-            victoria.inventory.pop(x)
-            is_in_inventory = 1
-    if is_in_inventory == 0:
-        print(f"You never had {item} to begin with!")
-    game_loop()
-
         
     
 
@@ -129,6 +85,7 @@ def drop_item(item):
 def valid_command_needed():
     print("Please enter a valid command, or q to quit the game!")
     game_loop()
+
 #core loop of the game
 def game_loop():
     
@@ -158,31 +115,26 @@ def game_loop():
             print("Thanks for playing and have a nice day!")
         #if the user wants to see their inventory
         elif user_input == "i":
-            if len(victoria.inventory) > 0:
-                print("==Inventory==")
-                for x in victoria.inventory:
-                    print(x.name)
-            else:
-                print("Your pockets are empty")
+            victoria.print_inventory()
             game_loop()
         #if the user wants to move around
         elif user_input == "n" or user_input == "e" or user_input == "s" or user_input == "w":
-            move_player(user_input)
+            victoria.move_player(user_input)
+            game_loop()
         else: 
             valid_command_needed()
+    #two words! so they either want to drop something or pick it up
     elif len(user_input) == 2:
         #if the user wants to pick something up
         if user_input[0] == "take" or user_input[0] == "get":
-            take_item(user_input[1])
+            victoria.take_item(user_input[1])
+            game_loop()
         if user_input[0] == "drop":
-            drop_item(user_input[1])
+            victoria.drop_item(user_input[1])
+            game_loop()
         else:
             valid_command_needed()
     else:
         valid_command_needed()
-
-
-
-
 
 game_loop()
