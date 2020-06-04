@@ -125,14 +125,18 @@ def game_loop():
     print("Movement: [n] [e] [s] [w] [q for quit]\nPick up item: [take [item]]")
     
     #get input and act
-    user_input = input().lower()
+    user_input = input().lower().split(" ")
+    print(user_input)
     
-    if user_input == "q":
-        print("Thanks for playing and have a nice day!")
-    elif user_input == "n" or user_input == "e" or user_input == "s" or user_input == "w":
-        move_player(user_input)
-    elif user_input[0:5] == "take ":
-        take_item(user_input[5:])
+    if len(user_input) == 1:
+        user_input = user_input[0]
+        if user_input == "q":
+            print("Thanks for playing and have a nice day!")
+        elif user_input == "n" or user_input == "e" or user_input == "s" or user_input == "w":
+            move_player(user_input)
+    elif len(user_input) == 2:
+        if user_input[0] == "take" or user_input[0] == "get":
+            take_item(user_input[1])
     else:
         print("Please enter a valid command, or q to quit the game!")
 
