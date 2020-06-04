@@ -95,17 +95,20 @@ def take_item(item):
     for k, v in victoria.current_room.items_list.items():
         if v.name.lower() == item:
             victoria.inventory.append(v)
-            
-            print(f"You have picked up the {v.name}")
+            v.on_take()
+            # print(f"You have picked up the {v.name}")
             is_in_room = 1
+            key = k
     if is_in_room == 1:
-        victoria.current_room.items_list.pop(k)
+        victoria.current_room.items_list.pop(key)
     else:
         print("That item isn't in this room!")
     game_loop()      
         
             
-    
+def valid_command_needed():
+    print("Please enter a valid command, or q to quit the game!")
+    game_loop()
 #core loop of the game
 def game_loop():
     
@@ -126,7 +129,7 @@ def game_loop():
     
     #get input and act
     user_input = input().lower().split(" ")
-    print(user_input)
+    
     
     if len(user_input) == 1:
         user_input = user_input[0]
@@ -134,11 +137,15 @@ def game_loop():
             print("Thanks for playing and have a nice day!")
         elif user_input == "n" or user_input == "e" or user_input == "s" or user_input == "w":
             move_player(user_input)
+        else: 
+            valid_command_needed()
     elif len(user_input) == 2:
         if user_input[0] == "take" or user_input[0] == "get":
             take_item(user_input[1])
+        else:
+            valid_command_needed()
     else:
-        print("Please enter a valid command, or q to quit the game!")
+        valid_command_needed()
 
 
 
